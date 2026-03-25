@@ -2,6 +2,9 @@ package com.company.project.models;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
+
+import org.hibernate.validator.constraints.Normalized;
 
 import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
@@ -12,6 +15,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -22,9 +27,9 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor
+
 public class Employee {
     
     @Id
@@ -58,4 +63,11 @@ public class Employee {
     @JoinColumn(name="emp_dept")
     private Department department;
 
+    @ManyToMany
+    @JoinTable(
+        name="employee_mission",
+        joinColumns=@JoinColumn(name = "employee_id"),
+        inverseJoinColumns=@JoinColumn(name = "mission_id")
+    )
+    private List<Mission> missions;
 }

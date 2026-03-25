@@ -1,5 +1,5 @@
 package com.company.project.models;
 
-public enum EmployeeRole {
-    
+public @interface ManytoMany {
+
 }
